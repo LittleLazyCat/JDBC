@@ -25,7 +25,7 @@ public final class JdbcUtils {
 		return DriverManager.getConnection(url, user, password);
 	}
 
-	public void free(ResultSet rs, Statement st, Connection conn) throws SQLException {
+	public static void free(ResultSet rs, Statement st, Connection conn) throws SQLException {
 		try {
 			if (rs != null) {
 				rs.close();
