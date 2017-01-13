@@ -29,9 +29,12 @@ public class DaoTest extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		User user = null;
 		UserDao userdao = DaoFactory.getInstance().getuserDaoImp();
 		user = userdao.getUser(1);
+		//userdao.addUser(null);
+		userdao.download();
 		response.setCharacterEncoding("GBK");
 		response.getWriter().append("Served at: ").append(user.getUser_Psw());
 	}

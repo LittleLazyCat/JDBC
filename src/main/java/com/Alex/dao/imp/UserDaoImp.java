@@ -1,5 +1,15 @@
 package com.Alex.dao.imp;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +23,34 @@ import com.Alex.util.JdbcUtils;
 public class UserDaoImp implements UserDao {
 
 	public void addUser(User user) {
-		// TODO Auto-generated method stub
-		
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			// 建立连接
+			conn = JdbcUtils.getConnection();
+			// 创建连接
+			File file = new File("D:\\JavaWorkSpace\\JDBC\\src\\main\\resources\\AppLog_2017-01-09.txt");
+			Reader reader = new BufferedReader(new FileReader(file));
+			String sql = "INSERT INTO t_clob (Description) VALUES (?)";
+			ps = conn.prepareStatement(sql);
+			ps.setCharacterStream(1, reader, file.length());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RunTimeExcUser(e.getMessage(), e);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new RunTimeExcUser(e.getMessage(), e);
+		} finally {
+			try {
+				JdbcUtils.free(null, ps, conn);
+			} catch (SQLException e) {
+				throw new RunTimeExcUser(e.getMessage(), e);
+			}
+
+		}
+
 	}
 
 	public User getUser(int userId) {
@@ -22,7 +58,7 @@ public class UserDaoImp implements UserDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		User user=null;
+		User user = null;
 		try {
 			// 建立连接
 			conn = JdbcUtils.getConnection();
@@ -32,18 +68,18 @@ public class UserDaoImp implements UserDao {
 			ps.setInt(1, 1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-			user =  findUser(rs);
-				
+				user = findUser(rs);
+
 			}
 		} catch (SQLException e) {
-			throw new RunTimeExcUser("",e);
-		}finally {
+			throw new RunTimeExcUser(e.getMessage(), e);
+		} finally {
 			try {
 				JdbcUtils.free(rs, ps, conn);
 			} catch (SQLException e) {
-				throw new RunTimeExcUser("",e);
+				throw new RunTimeExcUser(e.getMessage(), e);
 			}
-			
+
 		}
 		return user;
 	}
@@ -63,6 +99,47 @@ public class UserDaoImp implements UserDao {
 
 	public void deleteUser(User user) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public void download() {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			conn = JdbcUtils.getConnection();
+			String sql = "select Description from t_clob where id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 1);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				InputStream in = rs.getBinaryStream(1);
+				File file = new File("D:\\log_bak.txt");
+				OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+				byte[] buff = new byte[1024];
+				for(int i=0;(i=in.read(buff))>0;)
+				{
+					out.write(buff,0,i);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new RunTimeExcUser(e.getMessage(), e);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new RunTimeExcUser(e.getMessage(), e);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RunTimeExcUser(e.getMessage(), e);
+		}finally {
+			try {
+				JdbcUtils.free(rs, ps, conn);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new RunTimeExcUser(e.getMessage(), e);
+			}
+		}
 
 	}
 

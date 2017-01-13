@@ -1,4 +1,9 @@
 package com.Alex.jdbc;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +13,23 @@ import com.Alex.util.JdbcUtils;
 
 public class Crud{
 
+	static void create() throws SQLException, FileNotFoundException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try{
+			conn = JdbcUtils.getConnection();
+			File file = new File("img_03.jpg");
+			Reader reader = new BufferedReader(new FileReader(file));
+			String sql = "INSERT INTO t_clob (Description) VALUES (?)";
+			ps = conn.prepareStatement(sql);
+			ps.setCharacterStream(1, reader,file.length());
+			ps.executeUpdate();
+		}
+		finally{
+			JdbcUtils.free(null, ps, conn);
+		}
+		
+	}
 	static void read() throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
