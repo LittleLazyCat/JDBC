@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.Alex.dao.ex.RunTimeExcUser;
+
 public final class JdbcUtils {
 
 	private static String url = "jdbc:mysql://localhost:3306/test";
@@ -25,21 +27,32 @@ public final class JdbcUtils {
 		return DriverManager.getConnection(url, user, password);
 	}
 
-	public static void free(ResultSet rs, Statement st, Connection conn) throws SQLException {
+	public static void free(ResultSet rs, Statement st, Connection conn){
 		try {
 			if (rs != null) {
 				rs.close();
 			}
+		}catch (SQLException e) {
+			// TODO: handle exception
+			throw new RunTimeExcUser(e.getMessage(), e);
 		} finally {
 			try {
 				if (st != null) {
 					st.close();
 				}
+			}catch (SQLException e) {
+				// TODO: handle exception
+				throw new RunTimeExcUser(e.getMessage(), e);
 			} finally {
-
-				if (conn != null) {
+				try {
+					if (conn != null) {
 					conn.close();
 				}
+				} catch (SQLException e) {
+					// TODO: handle exception
+					throw new RunTimeExcUser(e.getMessage(), e);
+				}
+				
 
 			}
 		}

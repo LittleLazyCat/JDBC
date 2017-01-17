@@ -43,11 +43,9 @@ public class UserDaoImp implements UserDao {
 			// TODO Auto-generated catch block
 			throw new RunTimeExcUser(e.getMessage(), e);
 		} finally {
-			try {
+			 
 				JdbcUtils.free(null, ps, conn);
-			} catch (SQLException e) {
-				throw new RunTimeExcUser(e.getMessage(), e);
-			}
+			 
 
 		}
 
@@ -74,11 +72,9 @@ public class UserDaoImp implements UserDao {
 		} catch (SQLException e) {
 			throw new RunTimeExcUser(e.getMessage(), e);
 		} finally {
-			try {
+			 
 				JdbcUtils.free(rs, ps, conn);
-			} catch (SQLException e) {
-				throw new RunTimeExcUser(e.getMessage(), e);
-			}
+			 
 
 		}
 		return user;
@@ -122,23 +118,18 @@ public class UserDaoImp implements UserDao {
 				{
 					out.write(buff,0,i);
 				}
+				out.close();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException e) { 
 			throw new RunTimeExcUser(e.getMessage(), e);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (FileNotFoundException e) { 
 			throw new RunTimeExcUser(e.getMessage(), e);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) { 
 			throw new RunTimeExcUser(e.getMessage(), e);
 		}finally {
-			try {
+			 
 				JdbcUtils.free(rs, ps, conn);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				throw new RunTimeExcUser(e.getMessage(), e);
-			}
+			 
 		}
 
 	}

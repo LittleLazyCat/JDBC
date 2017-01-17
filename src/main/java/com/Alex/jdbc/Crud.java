@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.Alex.dao.ex.RunTimeExcUser;
 import com.Alex.util.JdbcUtils;
 
 public class Crud{
@@ -47,6 +48,25 @@ public class Crud{
 			}
 		} finally {
 			JdbcUtils.free(rs, ps, conn);
+		}
+	}
+	
+	static void update() throws SQLException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try{
+			conn = JdbcUtils.getConnection();
+			String sql = "update t_user set USER_EMAIL = ? where USER_ID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "123@qq.com");
+			ps.setInt(2, 10);
+			ps.executeLargeUpdate();
+		}catch (SQLException e) {
+			// TODO: handle exception
+			throw new RunTimeExcUser(e.getMessage(), e);
+		}
+		finally {
+			JdbcUtils.free(null, ps, conn);
 		}
 	}
 }
