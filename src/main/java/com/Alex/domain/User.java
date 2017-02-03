@@ -1,32 +1,38 @@
 package com.Alex.domain;
 
 public class User {
-	private int user_Id;
-	private String user_Name;
-	private String user_Psw;
-	private String user_Email;
-	public int getUser_Id() {
-		return user_Id;
+	private int userId;
+	private String userName;
+	private String userPsw;
+	private String userEmail;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser_Id(int user_Id) {
-		this.user_Id = user_Id;
+	public void setUserId(int user_Id) {
+		this.userId = user_Id;
 	}
-	public String getUser_Name() {
-		return user_Name;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUser_Name(String user_Name) {
-		this.user_Name = user_Name;
+	public void setUserName(String user_Name) {
+		this.userName = user_Name;
 	}
-	public String getUser_Psw() {
-		return user_Psw;
+	public String getUserPsw() {
+		return userPsw;
 	}
-	public void setUser_Psw(String user_Psw) {
-		this.user_Psw = user_Psw;
+	public void setUserPsw(String user_Psw) {
+		this.userPsw = user_Psw;
 	}
-	public String getUser_Email() {
-		return user_Email;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setUser_Email(String user_Email) {
-		this.user_Email = user_Email;
+	public void setUserEmail(String user_Email) {
+		this.userEmail = user_Email;
 	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", userPsw=" + userPsw + ", userEmail=" + userEmail
+				+ "]";
+	}
+	
 }

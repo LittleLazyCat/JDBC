@@ -19,4 +19,14 @@
     <servlet-name>DaoTest</servlet-name>
     <url-pattern>/DaoTest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>jdbcTemplateTest</display-name>
+    <servlet-name>jdbcTemplateTest</servlet-name>
+    <servlet-class>com.Alex.spring.jdbcTemplateTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jdbcTemplateTest</servlet-name>
+    <url-pattern>/jdbcTemplateTest</url-pattern>
+  </servlet-mapping>
 </web-app>

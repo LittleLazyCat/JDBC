@@ -36,7 +36,7 @@ public class DaoTest extends HttpServlet {
 		//userdao.addUser(null);
 		userdao.download();
 		response.setCharacterEncoding("GBK");
-		response.getWriter().append("Served at: ").append(user.getUser_Psw());
+		response.getWriter().append("Served at: ").append(user.getUserPsw());
 	}
 
 	/**

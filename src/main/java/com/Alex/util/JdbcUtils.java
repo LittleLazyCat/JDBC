@@ -1,27 +1,57 @@
 package com.Alex.util;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
+
+import javax.sql.DataSource;
 
 import com.Alex.dao.ex.RunTimeExcUser;
+
 
 public final class JdbcUtils {
 
 	private static String url = "jdbc:mysql://localhost:3306/test";
 	private static String user = "root";
 	private static String password = "root";
+	private static DataSource myDataSource = null;
+
+	private JdbcUtils() {
+	}
+//	static {
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver");
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
 	static {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			// myDataSource = new MyDataSource2();
+			Properties prop = new Properties();
+			// prop.setProperty("driverClassName", "com.mysql.jdbc.Driver");
+			// prop.setProperty("user", "user");
 
+			InputStream is = JdbcUtils.class.getClassLoader()
+					.getResourceAsStream("dbcpconfig.properties");
+			prop.load(is);
+			myDataSource = org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory.createDataSource(prop);
+		} catch (Exception e) {
+			throw new ExceptionInInitializerError(e);
+		}
 	}
+
+	public static DataSource getDataSource() {
+		return  myDataSource;
+	}
+	
 
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(url, user, password);

@@ -82,9 +82,9 @@ public class UserDaoImp implements UserDao {
 
 	private User findUser(ResultSet rs) throws SQLException {
 		User user = new User();
-		user.setUser_Name(rs.getString("USER_NAME"));
-		user.setUser_Psw(rs.getString("USER_PASSWORD"));
-		user.setUser_Email(rs.getString("USER_EMAIL"));
+		user.setUserName(rs.getString("USER_NAME"));
+		user.setUserPsw(rs.getString("USER_PASSWORD"));
+		user.setUserEmail(rs.getString("USER_EMAIL"));
 		return user;
 	}
 
