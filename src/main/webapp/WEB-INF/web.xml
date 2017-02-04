@@ -29,4 +29,14 @@
     <servlet-name>DBMD</servlet-name>
     <url-pattern>/DBMD</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ParameterMetaTest</display-name>
+    <servlet-name>ParameterMetaTest</servlet-name>
+    <servlet-class>com.Alex.jdbc.ParameterMetaTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ParameterMetaTest</servlet-name>
+    <url-pattern>/ParameterMetaTest</url-pattern>
+  </servlet-mapping>
 </web-app>

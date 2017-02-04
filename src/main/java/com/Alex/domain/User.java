@@ -1,32 +1,34 @@
 package com.Alex.domain;
 
 public class User {
-	private int user_Id;
-	private String user_Name;
-	private String user_Psw;
-	private String user_Email;
-	public int getUser_Id() {
-		return user_Id;
+	private int userid;
+	private String username;
+	private String userpassword;
+	public String getUserpassword() {
+		return userpassword;
 	}
-	public void setUser_Id(int user_Id) {
-		this.user_Id = user_Id;
+	public void setUserpassword(String userpassword) {
+		this.userpassword = userpassword;
 	}
-	public String getUser_Name() {
-		return user_Name;
+	private String useremail;
+	public int getUserid() {
+		return userid;
 	}
-	public void setUser_Name(String user_Name) {
-		this.user_Name = user_Name;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
-	public String getUser_Psw() {
-		return user_Psw;
+	public String getUsername() {
+		return username;
 	}
-	public void setUser_Psw(String user_Psw) {
-		this.user_Psw = user_Psw;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getUser_Email() {
-		return user_Email;
+	
+	public String getUseremail() {
+		return useremail;
 	}
-	public void setUser_Email(String user_Email) {
-		this.user_Email = user_Email;
+	public void setUseremail(String useremail) {
+		this.useremail = useremail;
 	}
+	
 }
