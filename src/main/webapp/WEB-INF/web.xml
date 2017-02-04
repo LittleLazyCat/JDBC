@@ -39,4 +39,14 @@
     <servlet-name>NamedJdbcTemplate</servlet-name>
     <url-pattern>/NamedJdbcTemplate</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SimpleJdbcTemplateTest</display-name>
+    <servlet-name>SimpleJdbcTemplateTest</servlet-name>
+    <servlet-class>com.Alex.spring.SimpleJdbcTemplateTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SimpleJdbcTemplateTest</servlet-name>
+    <url-pattern>/SimpleJdbcTemplateTest</url-pattern>
+  </servlet-mapping>
 </web-app>
