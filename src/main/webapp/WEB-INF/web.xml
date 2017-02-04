@@ -19,4 +19,14 @@
     <servlet-name>DaoTest</servlet-name>
     <url-pattern>/DaoTest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DBMD</display-name>
+    <servlet-name>DBMD</servlet-name>
+    <servlet-class>com.Alex.jdbc.DBMD</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBMD</servlet-name>
+    <url-pattern>/DBMD</url-pattern>
+  </servlet-mapping>
 </web-app>
