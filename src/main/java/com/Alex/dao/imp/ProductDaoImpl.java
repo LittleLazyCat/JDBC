@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.dbcp.BasicDataSource;
+
 import com.Alex.dao.ProductDao;
 import com.Alex.domain.Product;
 
@@ -14,17 +16,25 @@ public class ProductDaoImpl implements ProductDao {
 	private static String DB_URL = "jdbc:mysql://localhost:3306/test";
 	private static String DB_USER_NAME = "root";
 	private static String DB_PASSWORD = "root";
-
+	public static BasicDataSource ds = null;
+	
+	public static void dbpoolInit(){
+		ds = new BasicDataSource();
+		ds.setUrl(DB_URL);
+		ds.setDriverClassName(DRIVER_NAME);
+		ds.setUsername(DB_USER_NAME);
+		ds.setPassword(DB_PASSWORD);
+	}
+	
 	public Product getProduct(Product p) {
-
+		dbpoolInit();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			// 注册驱动
-			Class.forName(DRIVER_NAME);
+			
 			// 建立连接
-			conn = DriverManager.getConnection(DB_URL, DB_USER_NAME, DB_PASSWORD);
+			conn = ds.getConnection();
 			// 创建语句
 			String sql = "select Id,ProductName,Inventory from product where id =?";
 			ps = conn.prepareStatement(sql);
@@ -36,9 +46,6 @@ public class ProductDaoImpl implements ProductDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 
