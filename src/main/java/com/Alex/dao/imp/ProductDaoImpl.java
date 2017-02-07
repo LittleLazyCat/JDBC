@@ -12,12 +12,12 @@ import com.Alex.dao.ProductDao;
 import com.Alex.domain.Product;
 
 public class ProductDaoImpl implements ProductDao {
-	private static String DRIVER_NAME = "com.mysql.jdbc.Driver";
-	private static String DB_URL = "jdbc:mysql://localhost:3306/test";
-	private static String DB_USER_NAME = "root";
-	private static String DB_PASSWORD = "root";
+	private static String DRIVER_NAME = "com.mysql.jdbc.Driver";	//驱动名
+	private static String DB_URL = "jdbc:mysql://localhost:3306/test";		//URL
+	private static String DB_USER_NAME = "root";		//用户名
+	private static String DB_PASSWORD = "root";		//密码
 	public static BasicDataSource ds = null;
-	
+	//初始化数据库连接池
 	public static void dbpoolInit(){
 		ds = new BasicDataSource();
 		ds.setUrl(DB_URL);
@@ -79,6 +79,70 @@ public class ProductDaoImpl implements ProductDao {
 		}
 
 		return p;
+	}
+
+	public void buyProduct(Product p, String name) {
+		dbpoolInit();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			
+			// 建立连接
+			conn = ds.getConnection();
+			//开启事务
+			conn.setAutoCommit(false);
+			// 创建语句
+			String sql = "insert into orders (Buyer,ProductName) values(?,?)"; 
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, p.getProductName());
+			ps.execute();
+			sql = "UPDATE product SET Inventory = Inventory -1 WHERE ProductName = ?";
+			ps = conn.prepareStatement(sql); 
+			ps.setString(1, p.getProductName());
+			ps.execute();
+			conn.commit();
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			} finally {
+
+				try {
+					if (ps != null) {
+						ps.close();
+					}
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				} finally {
+					try {
+						if (conn != null) {
+							conn.close();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+
+		
 	}
 
 }

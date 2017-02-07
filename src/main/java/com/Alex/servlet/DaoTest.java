@@ -39,11 +39,12 @@ public class DaoTest extends HttpServlet {
 //		//userdao.addUser(null);
 //		userdao.download();
 		Product p = new Product();
-		p.setId(1);
+		String name = "XiaoMing";
+		p.setProductName("bag");
 		ProductDao proDao = new ProductDaoImpl();
-		p = proDao.getProduct(p);
-		response.setCharacterEncoding("GBK");
-		response.getWriter().append("Served at: ").append(p.toString());
+	    proDao.buyProduct(p, name);
+		response.setCharacterEncoding("utf8");
+		response.getWriter().append("Served at: ").append("111");
 	}
 
 	/**
