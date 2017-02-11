@@ -22,5 +22,9 @@ public class Product {
 	public void setCatalog(String catalog) {
 		this.catalog = catalog;
 	}
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", productName=" + productName + ", catalog=" + catalog + "]";
+	}
 	
 }

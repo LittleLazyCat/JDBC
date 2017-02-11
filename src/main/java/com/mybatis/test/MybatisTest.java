@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mybatis.FindProduct;
 import com.mybatis.FindUser;
+import com.mybatis.domain.Product;
 import com.mybatis.domain.User;
 
 /**
@@ -28,7 +30,8 @@ public class MybatisTest extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		User user = new FindUser().findUser(1);
+		User user = new FindUser().getUser(1);
+//		Product p = new FindProduct().getProduct(1);
 		response.getWriter().append("Served at: ").append(user.toString());
 	}
 

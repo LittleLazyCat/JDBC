@@ -6,7 +6,13 @@ public class User {
 	private int id;
 	private String userName;
 	private String tel;
-	private List<Integer> products;
+	private List<Product> products;
+	
+	public User(Integer id, String userName, String tel) {
+		this.id = id;
+		this.userName = userName;
+		this.tel = tel; 
+	}
 	public int getId() {
 		return id;
 	}
@@ -25,10 +31,10 @@ public class User {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public List<Integer> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
-	public void setProducts(List<Integer> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 	@Override
