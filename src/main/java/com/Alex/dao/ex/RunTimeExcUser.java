@@ -2,6 +2,11 @@ package com.Alex.dao.ex;
 
 public class RunTimeExcUser extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public RunTimeExcUser() {
 		// TODO Auto-generated constructor stub
 	}

@@ -15,7 +15,6 @@ public class DaoFactory {
 		 Class clazz = Class.forName(userDaoClass);
 		 userDaoImp = (UserDaoImp)clazz.newInstance();
 	 }catch (Exception e) {
-		// TODO: handle exception
 		 throw new ExceptionInInitializerError(e);
 	}
  }

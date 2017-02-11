@@ -19,13 +19,13 @@ public class FindProduct {
 		SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(is);
 		// 4.openSession()方法设为TRUE，则会自动提交
 		SqlSession session = ssf.openSession(true);
-		Product user= null;
+		Product pro= null;
 		try {
 			// 5.获取操作类
 			Op op = session.getMapper(Op.class);
 			// 查询用户
-			user = op.getProduct(id);
-			return user;
+			pro = op.getProduct(id);
+			return pro;
 		} finally {
 			session.close();
 			

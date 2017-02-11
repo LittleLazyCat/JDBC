@@ -19,7 +19,7 @@ public class MyDataSource implements DataSource {
 	private static String password = "root";
 
 	private static int initCount = 1;
-	private static int maxCount = 1;
+	private static int maxCount = 10;
 	int currentCount = 0;
 
 	LinkedList<Connection> connectionsPool = new LinkedList<Connection>();
