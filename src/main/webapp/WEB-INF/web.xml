@@ -49,4 +49,14 @@
     <servlet-name>SimpleJdbcTemplateTest</servlet-name>
     <url-pattern>/SimpleJdbcTemplateTest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MybatisTest</display-name>
+    <servlet-name>MybatisTest</servlet-name>
+    <servlet-class>com.mybatis.test.MybatisTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MybatisTest</servlet-name>
+    <url-pattern>/MybatisTest</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,4 +1,4 @@
-package com.Alex.servlet;
+package com.mybatis.test;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,23 +6,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.Alex.dao.ProductDao;
-import com.Alex.dao.UserDao;
-import com.Alex.dao.imp.DaoFactory;
-import com.Alex.dao.imp.ProductDaoImpl;
-import com.Alex.domain.Product;
-import com.Alex.domain.User;
+import com.mybatis.FindUser;
+import com.mybatis.domain.User;
 
 /**
- * Servlet implementation class DaoTest
+ * Servlet implementation class MybatisTest
  */
-public class DaoTest extends HttpServlet {
+public class MybatisTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public DaoTest() {
+    public MybatisTest() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -31,19 +28,8 @@ public class DaoTest extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		User user = null;
-		UserDao userdao = DaoFactory.getInstance().getuserDaoImp();
-		user = userdao.getUser(1);
-		//userdao.addUser(null);
-		userdao.download();
-		Product p = new Product();
-		String name = "XiaoMing";
-		p.setProductName("bag");
-		ProductDao proDao = new ProductDaoImpl();
-	    proDao.buyProduct(p, name);
-		response.setCharacterEncoding("utf8");
-		response.getWriter().append("Served at: ").append("111");
+		User user = new FindUser().findUser(1);
+		response.getWriter().append("Served at: ").append(user.toString());
 	}
 
 	/**
