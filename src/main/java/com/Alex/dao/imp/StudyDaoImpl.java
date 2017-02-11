@@ -25,9 +25,9 @@ public class StudyDaoImpl implements StudyDao {
 			// 创建连接
 			String sql = "select courseName from study where userName = ?";
 			ps = conn.prepareStatement(sql);
-			//设置参数
+			// 设置参数
 			ps.setString(1, name);
-			//执行查询
+			// 执行查询
 			rs = ps.executeQuery();
 			list = new ArrayList<String>();
 			while(rs.next()){
@@ -37,7 +37,7 @@ public class StudyDaoImpl implements StudyDao {
 		} catch (SQLException e) {
 			throw new RunTimeExcUser(e.getMessage(), e);
 		} finally {
-			//释放资源
+			// 释放资源
 			JdbcUtils.free(rs, ps, conn);
 
 		}
