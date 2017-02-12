@@ -15,7 +15,7 @@ public class SimpleTest {
 		InputStream in = SimpleTest.class.getClassLoader().getResourceAsStream("jdbcconfig.properties");
 		try {
 			prop.load(in);
-			url = prop.getProperty("studyDaoClass");
+			url = prop.getProperty("url");
 			user = prop.getProperty("username");
 			password = prop.getProperty("password");
 		} catch (IOException e) {
