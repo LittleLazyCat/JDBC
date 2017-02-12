@@ -11,17 +11,17 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.dbcp.BasicDataSource;
+
 import com.Alex.dao.ex.RunTimeExcUser;
 import com.Alex.dao.imp.DaoFactory;
 
 public final class JdbcUtils {
 
 	private static DataSource myDataSource = null;
+	private static BasicDataSource ds = null;
 	private static Properties prop = null;
-
-	private JdbcUtils() {
-	}
-
+ 
 	static {
 		try {
 
@@ -48,10 +48,16 @@ public final class JdbcUtils {
 			prop = new Properties();
 			InputStream in = JdbcUtils.class.getClassLoader().getResourceAsStream("jdbcconfig.properties");
 			prop.load(in);
+			String DriverName = prop.getProperty("driverClassName");
 			String url = prop.getProperty("url");
 			String user = prop.getProperty("username");
 			String password = prop.getProperty("password");
-			conn = DriverManager.getConnection(url, user, password);
+			ds = new BasicDataSource();
+			ds.setDriverClassName(DriverName);
+			ds.setUrl(url);
+			ds.setUsername(user);
+			ds.setPassword(password);
+			conn = ds.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
