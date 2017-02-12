@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.Alex.dao.StudyDao;
 import com.Alex.dao.ex.RunTimeExcUser;
@@ -15,23 +17,27 @@ public class StudyDaoImpl implements StudyDao {
 	Connection conn = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
-	List<String> list = null;
+	List<Map<String, Object>> list = null;
 
-	public List<String> getCourseInfo(String name) {
+	public List<Map<String, Object>> getCourseInfo() {
 
 		try {
 			// 建立连接
 			conn = JdbcUtils.getConnection();
 			// 创建连接
-			String sql = "select courseName from study where userName = ?";
+			String sql = "select userName,courseName from study";
 			ps = conn.prepareStatement(sql);
-			// 设置参数
-			ps.setString(1, name);
-			// 执行查询
+			//设置setFetchSize()方法的值
+			//先读取一条记录，处理结束后再处理下一条记录
+			ps.setFetchSize(1);
 			rs = ps.executeQuery();
-			list = new ArrayList<String>();
+			list = new ArrayList<Map<String,Object>>();
+			Map<String, Object> map = null;
 			while(rs.next()){
-				list.add(rs.getString(1));
+				map = new HashMap<String,Object>();
+				map.put("userName", rs.getString(1));
+				map.put("courseName", rs.getString(2));
+				list.add(map);
 			}
 			return list;
 		} catch (SQLException e) {

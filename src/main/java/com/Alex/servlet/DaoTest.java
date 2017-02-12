@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -56,12 +58,14 @@ public class DaoTest extends HttpServlet {
 		// proDao.buyProduct(p, name);
 		StudyDao studyDao = StudyDaoFactory.getInstance().getStudyDaoImp();
 		List list = new ArrayList();
-		list =  studyDao.getCourseInfo("ZhangSan");
+		list =  studyDao.getCourseInfo();
 		StringBuffer sb = new StringBuffer();
 		Iterator it = list.iterator();
+		Map<String, Object> map = null;
 			while (it.hasNext()) {
-				
-				sb.append( it.next()+ "<br>");
+				map = (Map<String, Object>) it.next();
+				sb.append("userName " + "courseName "+"<br>");
+				sb.append( map.get("userName")+" "+map.get("courseName")+ "<br>");
 
 			}
 		 
