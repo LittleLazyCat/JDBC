@@ -24,7 +24,7 @@ public class StudyDaoImpl implements StudyDao {
 		try {
 			// 建立连接
 			conn = JdbcUtils.getConnection();
-			// 创建连接
+			// 创建语句
 			String sql = "select userName,courseName from study";
 			ps = conn.prepareStatement(sql);
 			//设置setFetchSize()方法的值
@@ -48,6 +48,45 @@ public class StudyDaoImpl implements StudyDao {
 
 		}
 
+	}
+
+	public void changeP2P() {
+		try {
+			// 建立连接
+			conn = JdbcUtils.getConnection();
+			//开启事务
+			conn.setAutoCommit(false);
+			// 创建语句
+			String sql1 = "delete from study where userName = ? and courseName = ?";
+			ps = conn.prepareStatement(sql1);
+			ps.setString(1, "ZhangSan");
+			ps.setString(2, "Math");
+			//执行语句
+			ps.execute();
+			String sql2 = "insert into study (userName,courseName) values (?,?)";
+			ps = conn.prepareStatement(sql2);
+			ps.setString(1, "LiSi");
+			ps.setString(2, "Math");
+			//执行语句
+			ps.execute();
+			//提交事务
+			conn.commit();
+			 
+		} catch (SQLException e) {
+			if(conn!=null){
+				try {
+					//回滚事务
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			throw new RunTimeExcUser(e.getMessage(), e);
+		} finally {
+			// 释放资源
+			JdbcUtils.free(rs, ps, conn);
+
+		}
 	}
 
 }

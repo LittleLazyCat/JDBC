@@ -68,7 +68,7 @@ public class DaoTest extends HttpServlet {
 				sb.append( map.get("userName")+" "+map.get("courseName")+ "<br>");
 
 			}
-		 
+		studyDao.changeP2P();
 		response.setCharacterEncoding("utf8");
 		response.getWriter().append(sb.toString());
 	}
